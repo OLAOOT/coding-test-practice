@@ -1,0 +1,31 @@
+function solution(operations) {
+    let answer = [0, 0]
+
+    const queue = []
+    operations.forEach(operation => {
+        const [operator, operand] = operation.split(' ')
+        if (operator === 'I') {
+            if (!queue.length) {
+                queue.push(operand)
+            }
+            else {
+                queue.push(operand)
+                queue.sort((a, b) => a - b)
+            }
+        }
+        else if (queue.length) {
+            if (operand > 0) {
+                queue.length--
+            }
+            else {
+                queue.shift()
+            }
+        }
+        console.log(queue)
+    })
+
+    if (queue.length) {
+        answer = [parseInt(queue[queue.length - 1]), parseInt(queue[0])]
+    }
+    return answer
+}
